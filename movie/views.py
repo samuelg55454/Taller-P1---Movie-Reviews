@@ -15,12 +15,17 @@ def home(request):
     # uso de plantilla con parámetros
     #return render(request, 'home.html', {'name':'Paola Vallejo'})
 
-    # TODO: Obtener el término de búsqueda desde request.GET (parámetro 'searchMovie')
-    # TODO: Si hay término de búsqueda, filtrar películas por título (title__icontains)
-    # TODO: Si no hay búsqueda, listar todas las películas con Movie.objects.all()
-    # TODO: Pasar searchTerm y movies al template en el return
-    movies = Movie.objects.all()  # temporal: quitar y usar la lógica anterior
-    return render(request, 'home.html', {'movies': movies})
+    # búsqueda de películas
+    searchTerm = request.GET.get('searchMovie')
+
+    # si se está buscando una película
+    if searchTerm:
+        # lista únicamente la(s) película(s) cuyo título contiene el nombre buscado
+        movies = Movie.objects.filter(title__icontains=searchTerm)
+    else: 
+        # lista todas las películas de la base de datos
+        movies = Movie.objects.all()
+    return render(request, 'home.html', {'searchTerm':searchTerm, 'movies': movies})
 
 
 
