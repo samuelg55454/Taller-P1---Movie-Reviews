@@ -30,7 +30,7 @@
         </form>
 
         {% if searchTerm %}
-            <p class="text-muted mb-3">Buscando: <strong>{{ searchTerm }}</strong></p>
+            <p class="text-muted mb-3">Buscando: <strong>{{ searchTerm }}</strong> · <a href="{% url 'home' %}">Ver todas las películas</a></p>
         {% endif %}
 
         {% if movies %}
