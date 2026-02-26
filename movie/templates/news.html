@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News — Cine Vault</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0f0f0f; --surface: #1a1a1a; --amber: #f59e0b; --muted: #737373; }
+        body { background: var(--bg); color: #e5e5e5; font-family: 'Outfit', sans-serif; min-height: 100vh; }
+        .nav-cine { background: var(--surface) !important; border-bottom: 1px solid #2a2a2a; }
+        .nav-cine .nav-link { color: #a3a3a3; }
+        .nav-cine .nav-link:hover, .nav-cine .brand { color: var(--amber) !important; }
+        .news-item { background: var(--surface); border: 1px solid #2a2a2a; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; border-left: 4px solid var(--amber); }
+        .news-item .date { color: var(--amber); font-size: 0.8rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg nav-cine py-3">
+        <div class="container">
+            <a class="navbar-brand brand fw-bold" href="{% url 'home' %}">Cine Vault</a>
+            <div class="navbar-nav gap-3">
+                <a class="nav-link" href="{% url 'statistics' %}">Statistics</a>
+                <a class="nav-link" href="{% url 'news' %}">News</a>
+                <a class="nav-link" href="{% url 'about' %}">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="h3 fw-bold mb-4">News</h1>
+        <div class="row">
+            <div class="col-lg-8">
+                {% for item in news_items %}
+                    <article class="news-item">
+                        <p class="date mb-1">{{ item.date }}</p>
+                        <h2 class="h6 fw-bold mb-2">{{ item.title }}</h2>
+                        <p class="text-secondary small mb-0">{{ item.summary }}</p>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
