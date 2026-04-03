@@ -1,5 +1,6 @@
 """
 Load movies from movies_initial.csv into the Movie model.
+Uses the same logic as add_movies_db (genre, year, description from plot).
 Run from project root: python manage.py load_movies_csv
 """
 import csv
@@ -32,6 +33,7 @@ class Command(BaseCommand):
                 if not title or Movie.objects.filter(title=title).exists():
                     continue
 
+                # year
                 year_val = row.get('year')
                 if year_val and str(year_val).strip():
                     try:
@@ -46,7 +48,10 @@ class Command(BaseCommand):
                     genre_val = ''
                 genre_val = str(genre_val).strip()[:100]
 
+                # description from plot (max 250)
                 plot_val = (row.get('plot') or row.get('fullplot') or '').strip()[:250]
+
+                # optional poster URL for url field
                 poster = (row.get('poster') or '').strip()
                 url_val = poster if poster.startswith('http') else ''
 

@@ -1,1 +1,14 @@
 *.pyc
+__pycache__/
+db.sqlite3
+.env
+openAI.env
+media/
+entregables_latex/*.aux
+entregables_latex/*.log
+entregables_latex/*.out
+entregables_latex/*.toc
+*.env
+entregables_capturas/
+scripts/
+entregables_latex/*
